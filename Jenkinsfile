@@ -24,26 +24,25 @@ pipeline {
         checkout scm
       }
     }
-    
-    stage('Compile & Unit Tests') {
+  
+    stage('NPM Install') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-        sh 'cd Clinica/angular-base/;npm install'                
+        sh 'cd Clinica/angular-base/;npm install'                        
+      }
+    }
+
+    stage('Unit Test') {
+      steps {
+        echo "------------>Build<------------"
         sh 'cd Clinica/angular-base/;ng test --code-coverage'
       }
     }
 
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh 'cd Clinica/angular-base/;ng build'
-      }
-    }
-
-    stage('Deploy') {
+    stage('Test end-to-end') {
       steps {
         echo "------------>Deploy<------------"
-        //sh 'cd Clinica/angular-base/;ng serve'        
+        sh 'cd Clinica/angular-base/;ng e2e'        
       }
     }  
   }
