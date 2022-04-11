@@ -41,9 +41,10 @@ pipeline {
 
     stage('Static Code Analysis') {
       steps{
-          sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn.manuel.velasquez.clinica.front', 
-          sonarName:'Ceiba-Clinica-Front(manuel.velasquez)', 
-          sonarPathProperties:'./sonar-project.properties')
+          echo '------------>Análisis de código estático<------------'
+          withSonarQubeEnv('Sonar') {
+            sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+        } 
       }
     }
 
