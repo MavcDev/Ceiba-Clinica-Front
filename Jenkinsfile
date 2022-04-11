@@ -51,7 +51,7 @@ pipeline {
     stage('Test end-to-end') {
       steps {
         echo "------------>Test e2e<------------"
-        sh 'cd Clinica/angular-base/;ng e2e'        
+        //sh 'cd Clinica/angular-base/;ng e2e'        
       }
     }  
   }
