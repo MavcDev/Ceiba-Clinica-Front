@@ -86,7 +86,7 @@ export class CrearSolicitudComponent implements OnInit {
       {
         next: (response: Array<Especialidad>) => {
           this.especialidades = response;
-          if (this.especialidades.length >= 0) {
+          if (this.especialidades && this.especialidades.length >= 0) {
             const idEspecialidad = this.especialidades[0].id;
             this.actualizarValor(idEspecialidad);
             this.cargarMedicos(idEspecialidad);
