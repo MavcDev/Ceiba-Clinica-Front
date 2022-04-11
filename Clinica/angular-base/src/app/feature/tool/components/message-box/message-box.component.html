@@ -1,0 +1,13 @@
+<ng-template #msgBoxModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{titulo}}</h5>
+        <button type="button" class="close" (click)="modal.dismiss('cerrar')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" [innerHTML]="mensaje">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.dismiss('cerrar')">Cerrar</button>
+    </div>
+</ng-template>

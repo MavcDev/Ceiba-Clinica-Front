@@ -1,0 +1,33 @@
+<h1 class="mt-1">Solicitar Cita</h1>
+<p>
+    Para solicitar la cita ingrese su identificacion,
+    si no tiene usuario registrado, realice el proceso
+    de inscripcion.
+</p>
+<form [formGroup]="usuarioForm">
+    <div class="form-group">
+        <label for="inputIdentificacion">Identificación</label>
+        <input validar type="text" class="form-control" id="inputIdentificacion" placeholder="Identificación" formControlName="identificacion">
+    </div>
+</form>
+<div class="form-group">
+    <a id="linkCrearUsuario" routerLink="../crear">Inscribir Usuario</a>
+</div>
+<div class="form-group">
+    <button id="btnBuscarUsuario" *ngIf="this.usuarioForm.valid"  type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+</div>
+<ng-template #msgBoxModalCrear let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{tituloMensaje}}</h5>
+        <button type="button" class="close" (click)="modal.close('cerrar')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" [innerHTML]="mensaje">
+    </div>
+    <div class="modal-footer">
+        <button id="btncerrar" type="button" class="btn btn-secondary" (click)="modal.close('cerrar')">Cerrar</button>
+        <button id="btnCrearUsuario" type="button" class="btn btn-primary" (click)="modal.close('redirigir')">Crear Usuario</button>
+    </div>
+</ng-template>
+<app-message-box></app-message-box>

@@ -1,0 +1,53 @@
+<div class="card mt-2">
+    <div class="card-body">
+        <h5 class="card-title">Datos de la cita</h5>
+
+        <div class="row">
+            <div class="form-group col-sm">
+                <label for="inputEspecialidad">Especialidad</label>
+                <input validar type="text" class="form-control" id="inputEspecialidad" placeholder="Especialidad"
+                    value="{{solicitud?.especialidad}}" readonly>
+            </div>
+            <div class="form-group col-sm">
+                <label for="inputMedico">Medico</label>
+                <input type="text" class="form-control" id="inputMedico" placeholder="Medico"
+                    value="{{solicitud?.medico}}" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm">
+                <label for="inputFechaCita">Fecha cita</label>
+                <input validar type="text" class="form-control" id="inputFechaCita" placeholder="Fecha Cita"
+                    value="{{formated.date(solicitud?.fechaCita)}}" readonly>
+            </div>
+            <div class="form-group col-sm">
+                <label for="inputHora">Hora cita</label>
+                <input type="text" class="form-control" id="inputHora" placeholder="Hora"
+                    value="{{solicitud?.horaInicio}} - {{solicitud?.horaFinal}}" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm">
+                <label for="inputValor">Valor cita</label>
+                <input validar type="text" class="form-control" id="inputValor" placeholder="Valor"
+                    value="{{formated.currency(solicitud?.valorBase)}}" readonly>
+            </div>
+            <div class="form-group col-sm">
+                <label for="inputValorTotal">Valor total</label>
+                <input type="text" class="form-control" id="inputValorTotal" placeholder="Valor total"
+                    value="{{formated.currency(solicitud?.valor)}}" readonly>
+                <div id="valorTotalhelp" class="form-text" *ngIf="solicitud?.descuentoMenorEdad">Se aplico descuento por
+                    menor de edad</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputFechaSolicitud">Fecha solicitud</label>
+            <input validar type="text" class="form-control" id="inputFechaSolicitud" placeholder="Fecha solicitud"
+                value="{{formated.dateTime(solicitud?.fechaSolicitud)}}" readonly>
+        </div>
+
+    </div>
+</div>

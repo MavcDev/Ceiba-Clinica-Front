@@ -1,0 +1,28 @@
+<h1 class="mt-1">Inscripción de Usuario</h1>
+<form [formGroup]="usuarioForm" (ngSubmit)="confirmarCrear()">
+  <div class="form-group">
+    <label for="inputIdentificacion">Identificación</label>
+    <input validar type="text" class="form-control" id="inputIdentificacion" placeholder="Identificación" formControlName="identificacion">
+  </div>
+  <div class="form-group">
+    <label for="inputNombres">Nombre</label>
+    <input validar type="text" class="form-control" id="inputNombres" placeholder="Nombre" formControlName="nombres">
+  </div>
+  <div class="row">
+    <div class="form-group col-sm">
+      <label for="inputPrimerApellido">Primer Apellido</label>
+      <input validar type="text" class="form-control" id="inputPrimerApellido" placeholder="Primer Apellido" formControlName="primerApellido">
+    </div>
+    <div class="form-group col-sm">
+      <label for="inputSegundoApellido">Segundo Apellido</label>
+      <input type="text" class="form-control" id="inputSegundoApellido" placeholder="Segundo Apellido" formControlName="segundoApellido">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputFenacimiento">Fecha nacimiento</label>
+    <input validar type="date" class="form-control" id="inputFenacimiento" placeholder="Fecha Nacimiento" formControlName="fechaNacimiento">
+  </div>
+  <button id="btnSubmitUsuario" *ngIf="this.usuarioForm.valid" type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<app-message-box></app-message-box>
+<app-message-box-yes-not (msgBoxEvent)="confirmacion($event)"></app-message-box-yes-not>
