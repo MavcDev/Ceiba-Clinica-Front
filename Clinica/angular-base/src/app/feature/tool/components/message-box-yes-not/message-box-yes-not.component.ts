@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,7 +8,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class MessageBoxYesNotComponent implements OnInit {
 
-  @ViewChild('msgBoxModalYesNot') msgBoxModalYesNot: any;
+  @ViewChild('msgBoxModalYesNot') msgBoxModalYesNot: ElementRef;
   @Output() msgBoxEvent = new EventEmitter<boolean>();
 
   titulo = 'Mensaje de confirmación';

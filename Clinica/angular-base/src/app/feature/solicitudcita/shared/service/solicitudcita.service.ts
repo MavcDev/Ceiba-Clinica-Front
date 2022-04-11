@@ -17,6 +17,6 @@ export class SolicitudcitaService {
   }
 
   public guardar(solicitudcita: Solicitudcita){
-    return this.http.doPost<any, boolean>(`${environment.endpoint}/v1/clinica/solicitudcitas`, solicitudcita, this.http.optsName('crear/actualizar solicitud cita'));
+    return this.http.doPost<Solicitudcita, boolean>(`${environment.endpoint}/v1/clinica/solicitudcitas`, solicitudcita, this.http.optsName('crear/actualizar solicitud cita'));
   }
 }

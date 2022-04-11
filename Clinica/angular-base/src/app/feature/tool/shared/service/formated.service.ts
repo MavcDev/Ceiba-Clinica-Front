@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { CurrencyPipe } from '@angular/common';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Injectable()
 export class FormatedService {
@@ -21,7 +20,7 @@ export class FormatedService {
     return this.datePipe.transform(date, 'dd/MM/yyyy hh:mm:ss');
   }
 
-  public currency(currency: any){
+  public currency(currency: number){
     if (!currency){
       return '0';
     }

@@ -51,7 +51,7 @@ export class ConsultarSolicitudComponent implements OnInit {
     this.router.navigate([REDIRIGIR_CREAR_SOLICITUD_URL, { identificacion: this.identificacion }]);
   }
 
-  mostrarCajaTexto(titulo: string = 'Error', mensaje: string = 'Ocurrio un error inesperado.') {
+  mostrarCajaTexto(titulo = 'Error', mensaje = 'Ocurrio un error inesperado.') {
     this.mesageBox.open(titulo, mensaje);
   }
 }

@@ -86,7 +86,7 @@ export class CrearSolicitudComponent implements OnInit {
       {
         next: (response: Array<Especialidad>) => {
           this.especialidades = response;
-          if (this.especialidades && this.especialidades.length >= 0) {
+          if (!(this.especialidades.length <= 0)) {
             const idEspecialidad = this.especialidades[0].id;
             this.actualizarValor(idEspecialidad);
             this.cargarMedicos(idEspecialidad);
@@ -148,12 +148,12 @@ export class CrearSolicitudComponent implements OnInit {
 
     this.solicitudcitaServicio.guardar(solicitudcita).subscribe(
       {
-        next: (response: boolean) => { if (response) { this.redirigirAConsultarSolicitud(this.usuario); } },
+        next: () => { this.redirigirAConsultarSolicitud(this.usuario) },
         error: (excepcion) => this.mostrarCajaTexto(TITULO_MENSAJE_ERROR, excepcion?.error?.mensaje),
       });
   }
 
-  mostrarCajaTexto(titulo: string = 'Error', mensaje: string = 'Ocurrio un error inesperado.') {
+  mostrarCajaTexto(titulo = 'Error', mensaje = 'Ocurrio un error inesperado.') {
     this.mesageBox.open(titulo, mensaje);
   }
 

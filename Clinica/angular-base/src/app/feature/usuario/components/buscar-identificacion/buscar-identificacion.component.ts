@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageBoxComponent } from 'src/app/feature/tool/components/message-box/message-box.component';
@@ -11,6 +11,11 @@ const PATRON_SOLO_NUMERO_IDENTIFICACION = '^-?[0-9]\\d*(\\.\\d{1,2})?$';
 const REDIRIGIR = 'redirigir';
 const TITULO_MENSAJE_ERROR = 'Error';
 
+const NOT_FOUND = 404;
+
+const REDIRIGIR_CREAR_SOLICITUD_URL = 'solicitudcita/crear';
+const REDIRIGIR_CREAR_USUARIO_URL = '/usuario/crear';
+
 @Component({
   selector: 'app-buscar-identificacion',
   templateUrl: './buscar-identificacion.component.html',
@@ -19,7 +24,7 @@ const TITULO_MENSAJE_ERROR = 'Error';
 export class BuscarIdentificacionComponent implements OnInit {
 
   @ViewChild(MessageBoxComponent) mesageBox: MessageBoxComponent;
-  @ViewChild('msgBoxModalCrear') msgBoxModalCrear: any;
+  @ViewChild('msgBoxModalCrear') msgBoxModalCrear: ElementRef;
 
   usuarioForm: FormGroup;
   tituloMensaje: string;
@@ -56,7 +61,7 @@ export class BuscarIdentificacionComponent implements OnInit {
   }
 
   mostrarMensajePorExepcionBuscar(excepcion, identificacion) {
-    if (excepcion.status === 404) {
+    if (excepcion.status === NOT_FOUND) {
       this.mostrarMensajeCrear(identificacion);
       return;
     }
@@ -64,7 +69,7 @@ export class BuscarIdentificacionComponent implements OnInit {
   }
 
   mostrarMensajeCrear(identificacion: string) {
-    this.mensaje = `El usuario con la identificacion <b> ${identificacion} </b> no se encuentra inscrito, por favor realice este proceso para poder realizar la solicitud de la cita.`;
+    this.mensaje = `El usuario con la identificacion <b> ${identificacion} </b> no se encuentra inscrito, realice este proceso para poder realizar la solicitud de la cita.`;
     this.modalService.open(this.msgBoxModalCrear, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       if (result === REDIRIGIR) {
         this.redirigirACrearusuario(identificacion);
@@ -72,7 +77,7 @@ export class BuscarIdentificacionComponent implements OnInit {
     });
   }
 
-  mostrarCajaTexto(titulo: string = 'Error', mensaje: string = 'Ocurrio un error inesperado.') {
+  mostrarCajaTexto(titulo = 'Error', mensaje = 'Ocurrio un error inesperado.') {
     this.mesageBox.open(titulo, mensaje);
   }
 
@@ -82,10 +87,10 @@ export class BuscarIdentificacionComponent implements OnInit {
   }
 
   redirigirACrearSolicitud(identificacion: string) {
-    this.router.navigate(['solicitudcita/crear', { identificacion }]);
+    this.router.navigate([REDIRIGIR_CREAR_SOLICITUD_URL, { identificacion }]);
   }
 
   redirigirACrearusuario(identificacion: string) {
-    this.router.navigate(['/usuario/crear', { identificacion }]);
+    this.router.navigate([REDIRIGIR_CREAR_USUARIO_URL, { identificacion }]);
   }
 }

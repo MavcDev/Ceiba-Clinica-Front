@@ -64,7 +64,7 @@ export class CrearUsuarioComponent implements OnInit {
     const identificacion = this.usuarioForm.value.identificacion;
     this.usuarioServices.guardar(this.usuarioForm.value).subscribe(
       {
-        next: (response) => { if (response) { this.buscarUsuario(identificacion); } },
+        next: () => { this.buscarUsuario(identificacion) },
         error: (excepcion) => this.mostrarCajaTexto(TITULO_MENSAJE_ERROR, excepcion?.error?.mensaje),
       }
     );
@@ -83,7 +83,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.redirigirACrearSolicitud(respuestConsultar.identificacion);
   }
 
-  mostrarCajaTexto(titulo: string = 'Error', mensaje: string = 'Ocurrio un error inesperado.') {
+  mostrarCajaTexto(titulo = 'Error', mensaje = 'Ocurrio un error inesperado.') {
     this.mesageBox.open(titulo, mensaje);
   }
 
