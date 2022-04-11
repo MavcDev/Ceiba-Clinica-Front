@@ -34,10 +34,19 @@ pipeline {
 
     stage('Unit Test') {
       steps {
-        echo "------------>Build<------------"
-        sh 'cd Clinica/angular-base/;ng test --code-coverage'
+        echo "------------>Test<------------"
+        sh 'cd Clinica/angular-base/;ng test --code-coverage --watch=false'
       }
     }
+
+    stage('Static Code Analysis') {
+      steps{
+          sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn.manuel.velasquez.clinica.front', 
+          sonarName:'Ceiba-Clinica-Front(manuel.velasquez)', 
+          sonarPathProperties:'./sonar-project.properties')
+      }
+    }
+
 
     stage('Test end-to-end') {
       steps {
