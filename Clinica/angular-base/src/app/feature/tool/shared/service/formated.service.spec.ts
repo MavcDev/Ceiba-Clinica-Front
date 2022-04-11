@@ -33,7 +33,7 @@ describe('FormatedService', () => {
 
   it('Deberia devolver formato correctos', () => {
     const date = new Date();
-    const valor = '10000';
+    const valor: number = 10000;
     const resultDate = service.date(date);
     const resultDateTime = service.dateTime(date);
     const resultCurrency = service.currency(valor);
