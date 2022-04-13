@@ -22,7 +22,7 @@ const FALTAN_CAMPOS_POR_VALIDAR = 'Falta campos por validar';
 
 const IDENTIFICACION = 'identificacion';
 const REDIRIGIR_CREAR_USUARIO_URL = 'usuario/buscar';
-const REDIRIGIR_CONSULTAR_SOLICITUD_URL = 'solicitudcita/consultar';
+const REDIRIGIR_CONSULTAR_SOLICITUD_URL = 'solicitud/consultar';
 
 const FORMATO_FECHA = 'yyyy-MM-dd';
 const FORMATO_FECHA_HORA = 'yyyy-MM-dd hh:mm:ss';

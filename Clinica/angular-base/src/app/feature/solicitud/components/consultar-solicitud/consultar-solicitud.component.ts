@@ -7,7 +7,7 @@ const ID = 'id';
 const IDENTIFICACION = 'identificacion';
 const NOMBRE = 'nombre';
 
-const REDIRIGIR_CREAR_SOLICITUD_URL = 'solicitudcita/crear';
+const REDIRIGIR_CREAR_SOLICITUD_URL = 'solicitud/crear';
 
 @Component({
   selector: 'app-consultar-solicitud',
