@@ -35,7 +35,7 @@ pipeline {
     stage('Unit Test') {
       steps {
         echo "------------>Test<------------"
-        sh 'cd Clinica/angular-base/;ng test --watch=false'
+        //sh 'cd Clinica/angular-base/;ng test --watch=false'
       }
     }
 
