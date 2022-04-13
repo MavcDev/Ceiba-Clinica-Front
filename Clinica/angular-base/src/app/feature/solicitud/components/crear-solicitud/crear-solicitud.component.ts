@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SolicitudService } from '../../shared/service/solicitud.service';
@@ -42,17 +42,23 @@ export class CrearSolicitudComponent implements OnInit {
   especialidades: Array<Especialidad>;
   horarios: Array<Horario>;
   medicos: Array<Medico>;
+  formated: FormatedService;
+  datepipe: DatePipe;
+  protected route: ActivatedRoute;
+  protected router: Router;
 
   constructor(
-    protected route: ActivatedRoute,
-    protected router: Router,
-    protected datepipe: DatePipe,
+    protected injector: Injector,
     protected solicitudServicio: SolicitudService,
     protected especialidadServicio: EspecialidadService,
     protected medicoServicio: MedicoService,
     protected horarioServicio: HorarioService,
-    public formated: FormatedService
-  ) { }
+  ) {
+    this.formated = this.injector.get(FormatedService);
+    this.datepipe = this.injector.get(DatePipe);
+    this.route = this.injector.get(ActivatedRoute);
+    this.router = this.injector.get(Router);
+  }
 
   ngOnInit(): void {
     this.cargarUsuario();
