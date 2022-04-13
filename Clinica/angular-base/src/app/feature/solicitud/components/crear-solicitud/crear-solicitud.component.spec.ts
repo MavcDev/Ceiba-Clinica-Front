@@ -14,8 +14,10 @@ import { EspecialidadService } from '@shared/service/especialidad/especialidad.s
 import { MedicoService } from '@shared/service/medico/medico.service';
 import { HorarioService } from '@shared/service/horario/horario.service';
 import { CajaMensajeConfirmacionModalComponent } from '@shared/components/caja-mensaje-confirmacion-modal/caja-mensaje-confirmacion-modal.component';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { SharedModule } from '@shared/shared.module';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { CajaMensajeModalComponent } from '@shared/components/caja-mensaje-modal/caja-mensaje-modal.component';
+
 
 export function fakeAsyncResponse<T>(data: T) {
   return defer(() => Promise.resolve(data));
@@ -79,7 +81,8 @@ describe('CrearSolicitudComponent', () => {
           { path: 'solicitud/consultar', component: ConsultarSolicitudComponent }
         ]),
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        SharedModule
       ],
       providers: [
         SolicitudService,

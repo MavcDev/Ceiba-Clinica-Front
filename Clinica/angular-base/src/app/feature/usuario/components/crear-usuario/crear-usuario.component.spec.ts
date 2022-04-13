@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { CajaMensajeConfirmacionModalComponent } from '@shared/components/caja-mensaje-confirmacion-modal/caja-mensaje-confirmacion-modal.component';
 import { CajaMensajeModalComponent } from '@shared/components/caja-mensaje-modal/caja-mensaje-modal.component';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { defer, of } from 'rxjs';
 import { CrearSolicitudComponent } from 'src/app/feature/solicitud/components/crear-solicitud/crear-solicitud.component';
 import { UsuarioService } from '../../shared/service/usuario.service';

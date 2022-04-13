@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { FormatedService } from '@shared/service/formated.service';
 
 @Component({

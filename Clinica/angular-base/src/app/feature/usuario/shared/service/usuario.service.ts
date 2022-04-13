@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../model/usuario';
 

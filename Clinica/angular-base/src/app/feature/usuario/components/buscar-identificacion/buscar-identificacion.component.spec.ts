@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { defer } from 'rxjs';
 import { CrearSolicitudComponent } from 'src/app/feature/solicitud/components/crear-solicitud/crear-solicitud.component';
 import { UsuarioService } from '../../shared/service/usuario.service';
