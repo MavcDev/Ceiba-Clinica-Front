@@ -78,6 +78,7 @@ describe('CrearSolicitudComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([
           { path: 'solicitud/crear', component: CrearSolicitudComponent },
+          { path: 'solicitud/crear;identificacion=1117522442', component: CrearSolicitudComponent },
           { path: 'solicitud/consultar', component: ConsultarSolicitudComponent }
         ]),
         ReactiveFormsModule,

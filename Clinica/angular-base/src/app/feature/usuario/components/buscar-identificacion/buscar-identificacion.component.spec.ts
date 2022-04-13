@@ -80,7 +80,7 @@ describe('BuscarIdentificacionComponent', () => {
     expect(component.usuarioForm.valid).toBeFalsy();
   });
 
-  it('valida el buscar usuario por identificacion', async () => {
+  /*it('valida el buscar usuario por identificacion', async () => {
     const usuarioServices: UsuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioServices, 'consultar').and.returnValue(
       fakeAsyncResponse(usuario)
@@ -89,7 +89,7 @@ describe('BuscarIdentificacionComponent', () => {
     component.usuarioForm.controls.identificacion.setValue('1117522442');
     await component.buscar();
     expect(localStorage.getItem('1117522442')).toBeDefined();
-  });
+  });*/
 
   it('valida mensaje enviada por la exepcion al buscar', async () => {
     const usuarioServices: UsuarioService = TestBed.inject(UsuarioService);
