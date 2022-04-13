@@ -13,7 +13,7 @@ import { MedicoService } from '@shared/service/medico/medico.service';
 import { HorarioService } from '@shared/service/horario/horario.service';
 import { CajaMensajeConfirmacionModalComponent } from '@shared/components/caja-mensaje-confirmacion-modal/caja-mensaje-confirmacion-modal.component';
 import { CajaMensajeModalComponent } from '@shared/components/caja-mensaje-modal/caja-mensaje-modal.component';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 
 const TITULO_MENSAJE_VALIDACION = 'Validación';
 const TITULO_MENSAJE_CONFIRMACION = 'Mensaje de confirmación';

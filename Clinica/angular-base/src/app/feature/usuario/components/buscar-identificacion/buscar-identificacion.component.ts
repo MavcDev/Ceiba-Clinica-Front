@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { UsuarioService } from '../../shared/service/usuario.service';
 import { CajaMensajeCrearUsuarioComponent } from '../caja-mensaje-crear-usuario/caja-mensaje-crear-usuario.component';
 
