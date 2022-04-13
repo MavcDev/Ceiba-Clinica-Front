@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CajaMensajeModalComponent } from '@shared/components/caja-mensaje-modal/caja-mensaje-modal.component';
+import { SolicitudData } from '../../shared/model/solicitud-data';
 import { SolicitudService } from '../../shared/service/solicitud.service';
 
 const ID = 'id';
@@ -19,7 +20,7 @@ export class ConsultarSolicitudComponent implements OnInit {
   id: string;
   identificacion: string;
   nombre: string;
-  solicitudes: Array<any>;
+  solicitudes: Array<SolicitudData>;
 
   @ViewChild(CajaMensajeModalComponent) mensajeValidacion: CajaMensajeModalComponent;
 
@@ -39,7 +40,7 @@ export class ConsultarSolicitudComponent implements OnInit {
   cargarSolicitudes() {
     this.solicitudServicio.consultar(this.id).subscribe(
       {
-        next: (response: any) => { this.solicitudes = response; }
+        next: (response: Array<SolicitudData>) => { this.solicitudes = response; }
       });
   }
 

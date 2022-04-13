@@ -14,18 +14,20 @@ export class SolicitudData {
 
     constructor(
         id: string,
-        identificacionUsuario: string,
-        medico: string,
-        usuario: string,
-        especialidad: string,
-        fechaCita: string,
-        fechaSolicitud: string,
+        {
+            identificacionUsuario,
+            medico,
+            usuario,
+            especialidad,
+            fechaCita,
+            fechaSolicitud
+        },
         horaFinal: string,
         horaInicio: string,
         valor: number,
         valorBase: number,
         descuentoMenorEdad: boolean
-    ){
+    ) {
         this.id = id;
         this.identificacionUsuario = identificacionUsuario;
         this.medico = medico;

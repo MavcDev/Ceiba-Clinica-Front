@@ -15,7 +15,6 @@ export class ManejadorError implements ErrorHandler {
     const service = this.injector.get(NgbModal);
     const modal = service.open(CajaMensajeErrorModalComponent);
     modal.componentInstance.titulo = 'Error';
-    console.log(mensajeError.error.mensaje);
     modal.componentInstance.mensaje = (mensajeError.error?.mensaje) ? mensajeError.error?.mensaje : 'Error inesperado';
   }
 
