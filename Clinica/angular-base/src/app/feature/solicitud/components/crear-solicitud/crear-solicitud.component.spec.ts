@@ -98,8 +98,7 @@ describe('CrearSolicitudComponent', () => {
         CurrencyPipe,
         { provide: CajaMensajeConfirmacionModalComponent, useValue: cajaMensajeConfirmacionModalComponent }
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -111,6 +110,16 @@ describe('CrearSolicitudComponent', () => {
       fakeAsyncResponse(horario)
     );
 
+    const especialidadService: EspecialidadService = TestBed.inject(EspecialidadService);
+    spyOn(especialidadService, 'consultar').and.returnValue(
+      fakeAsyncResponse(listEspecailidad)
+    );
+
+    const medicoServicio: MedicoService = TestBed.inject(MedicoService);
+    spyOn(medicoServicio, 'consultar').and.returnValue(
+      fakeAsyncResponse(medico)
+    );
+
     fixture.detectChanges();
 
     const mensajeConfirmacion: CajaMensajeConfirmacionModalComponent = jasmine.createSpyObj('CajaMensajeConfirmacionModalComponent', ['abrir']);
@@ -118,6 +127,10 @@ describe('CrearSolicitudComponent', () => {
 
     const mensajeValidacion: CajaMensajeModalComponent = jasmine.createSpyObj('CajaMensajeModalComponent', ['abrir']);
     component.mensajeValidacion = mensajeValidacion;
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
@@ -140,10 +153,6 @@ describe('CrearSolicitudComponent', () => {
   });
 
   it('valida si se cargar los datos iniciales', async () => {
-    const especialidadService: EspecialidadService = TestBed.inject(EspecialidadService);
-    spyOn(especialidadService, 'consultar').and.returnValue(
-      fakeAsyncResponse(listEspecailidad)
-    );
     fixture.detectChanges();
 
     await component.cargarEspecialidades();
@@ -175,47 +184,17 @@ describe('CrearSolicitudComponent', () => {
 
   it('Valida la seleccion del medico por especialidad', async () => {
     component.especialidades = listEspecailidad;
-    const medicoServicio: MedicoService = TestBed.inject(MedicoService);
-    spyOn(medicoServicio, 'consultar').and.returnValue(
-      fakeAsyncResponse(medico)
-    );
     fixture.detectChanges();
     component.cambioEspecialidad('1');
     expect(component.valor).toBe(50000);
-    expect(medicoServicio.consultar).toHaveBeenCalled();
   });
 
   it('Valida la carga de espcialidades con datos', async () => {
-    const especialidadService: EspecialidadService = TestBed.inject(EspecialidadService);
-    spyOn(especialidadService, 'consultar').and.returnValue(
-      fakeAsyncResponse(listEspecailidad)
-    );
-
-    const medicoServicio: MedicoService = TestBed.inject(MedicoService);
-    spyOn(medicoServicio, 'consultar').and.returnValue(
-      fakeAsyncResponse(medico)
-    );
     fixture.detectChanges();
 
     await component.cargarEspecialidades();
 
     expect(component.valor).toBe(50000);
     expect(component.especialidades).toHaveSize(1);
-  });
-
-  it('Valida la carga de espcialidades sin datos', async () => {
-    const especialidadService: EspecialidadService = TestBed.inject(EspecialidadService);
-    spyOn(especialidadService, 'consultar').and.returnValue(
-      fakeAsyncResponse([])
-    );
-
-    const medicoServicio: MedicoService = TestBed.inject(MedicoService);
-    spyOn(medicoServicio, 'consultar').and.returnValue(
-      fakeAsyncResponse([])
-    );
-    fixture.detectChanges();
-
-    await component.cargarEspecialidades();
-    expect(component.valor).toBeUndefined();
   });
 });

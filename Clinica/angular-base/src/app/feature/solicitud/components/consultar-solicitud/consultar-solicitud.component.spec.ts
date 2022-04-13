@@ -22,8 +22,8 @@ describe('ConsultarSolicitudComponent', () => {
       declarations: [ConsultarSolicitudComponent],
       providers: [SolicitudService, HttpService],
       imports: [HttpClientModule, RouterTestingModule.withRoutes([
-        { path: 'solicitud/crear', component: CrearSolicitudComponent}
-    ])]
+        { path: 'solicitud/crear', component: CrearSolicitudComponent }
+      ])]
     })
       .compileComponents();
   });
@@ -38,6 +38,10 @@ describe('ConsultarSolicitudComponent', () => {
     );
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
