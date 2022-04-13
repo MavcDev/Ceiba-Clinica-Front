@@ -36,7 +36,7 @@ export class SolicitudData {
         this.horaFinal = horaFinal;
         this.horaInicio = horaInicio;
         this.valor = valor;
-        valorBase = valorBase;
+        this.valorBase = valorBase;
         this.descuentoMenorEdad = descuentoMenorEdad;
     }
 }

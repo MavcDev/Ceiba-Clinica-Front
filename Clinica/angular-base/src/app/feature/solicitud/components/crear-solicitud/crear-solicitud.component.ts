@@ -84,7 +84,7 @@ export class CrearSolicitudComponent implements OnInit {
       {
         next: (response: Array<Especialidad>) => {
           this.especialidades = response;
-          if (this.especialidades && (this.especialidades.length >= 0)) {
+          if (this.especialidades && (this.especialidades?.length >= 0)) {
             this.cambioEspecialidad(this.especialidades[0]?.id);
           }
         },
@@ -95,7 +95,7 @@ export class CrearSolicitudComponent implements OnInit {
 
   actualizarValor(idEspecialidad) {
     const seleccionEspecialidad = this.especialidades.filter(val => Number(val.id) === Number(idEspecialidad));
-    if (seleccionEspecialidad && (seleccionEspecialidad.length >= 0)) {
+    if (seleccionEspecialidad && (seleccionEspecialidad?.length >= 0)) {
       this.valor = seleccionEspecialidad[0]?.valor;
     }
   }
