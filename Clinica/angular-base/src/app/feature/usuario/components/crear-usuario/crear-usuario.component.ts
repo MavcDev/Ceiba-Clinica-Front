@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../../shared/service/usuario.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageBoxComponent } from 'src/app/feature/tool/components/message-box/message-box.component';
-import { MessageBoxYesNotComponent } from 'src/app/feature/tool/components/message-box-yes-not/message-box-yes-not.component';
+import { CajaMensajeConfirmacionModalComponent } from '@shared/components/caja-mensaje-confirmacion-modal/caja-mensaje-confirmacion-modal.component';
+import { CajaMensajeModalComponent } from '@shared/components/caja-mensaje-modal/caja-mensaje-modal.component';
 
 const MINIMA_LONGITUD_IDENTIFICACION = 6;
 const MAXIMA_LONGITUD_IDENTIFICACION = 11;
@@ -13,25 +13,24 @@ const PATRON_SOLO_NUMERO_IDENTIFICACION = '^-?[0-9]\\d*(\\.\\d{1,2})?$';
 const PATRON_SIN_ESPACIO_AL_INICIO = /^\S/;
 const PATRON_SIN_ESPACIO_AL_FINAL = /[\w]+[^\s]$/;
 
-const TITULO_MENSAJE_ERROR = 'Error';
 const TITULO_MENSAJE_VALIDACION = 'Validación';
 const TITULO_MENSAJE_CONFIRMACION = 'Mensaje de confirmación';
 const FALTAN_CAMPOS_POR_VALIDAR = 'Falta campos por validar';
 
 const IDENTIFICACION = 'identificacion';
-const REDIRIGIR_CREAR_SOLICITUD_URL = 'solicitudcita/crear';
+const REDIRIGIR_CREAR_SOLICITUD_URL = 'solicitud/crear';
 
 const FORMATO_FECHA_HORA = 'yyyy-MM-dd hh:mm:ss';
 
 @Component({
   selector: 'app-crear-usuario',
   templateUrl: './crear-usuario.component.html',
-  styleUrls: ['./crear-usuario.component.css']
+  styles: ['']
 })
 export class CrearUsuarioComponent implements OnInit {
 
-  @ViewChild(MessageBoxComponent) mesageBox: MessageBoxComponent;
-  @ViewChild(MessageBoxYesNotComponent) mesageBoxYesNot: MessageBoxYesNotComponent;
+  @ViewChild(CajaMensajeModalComponent) mensajeValidacion: CajaMensajeModalComponent;
+  @ViewChild(CajaMensajeConfirmacionModalComponent) mensajeConfirmacion: CajaMensajeConfirmacionModalComponent;
 
   usuarioForm: FormGroup;
   constructor(
@@ -54,10 +53,10 @@ export class CrearUsuarioComponent implements OnInit {
 
   confirmarCrear() {
     if (!this.usuarioForm.valid) {
-      this.mostrarCajaTexto(TITULO_MENSAJE_VALIDACION, FALTAN_CAMPOS_POR_VALIDAR);
+      this.mensajeValidacion.abrir(TITULO_MENSAJE_VALIDACION, FALTAN_CAMPOS_POR_VALIDAR);
       return;
     }
-    this.mesageBoxYesNot.open(TITULO_MENSAJE_CONFIRMACION, `Esta seguro de incribir el usuario con identificacion <b>${this.usuarioForm.value.identificacion}</b>.`);
+    this.mensajeConfirmacion.abrir(TITULO_MENSAJE_CONFIRMACION, `Esta seguro de incribir el usuario con identificacion ${this.usuarioForm.value.identificacion}`);
   }
 
   crear() {
@@ -65,7 +64,6 @@ export class CrearUsuarioComponent implements OnInit {
     this.usuarioServices.guardar(this.usuarioForm.value).subscribe(
       {
         next: () => { this.buscarUsuario(identificacion); },
-        error: (excepcion) => this.mostrarCajaTexto(TITULO_MENSAJE_ERROR, excepcion?.error?.mensaje),
       }
     );
   }
@@ -74,17 +72,12 @@ export class CrearUsuarioComponent implements OnInit {
     this.usuarioServices.consultar(identificacion).subscribe(
       {
         next: (response) => this.guardarYRedirigir(response),
-        error: (excepcion) => this.mostrarCajaTexto(TITULO_MENSAJE_ERROR, excepcion?.error?.mensaje),
       });
   }
 
   guardarYRedirigir(respuestConsultar) {
     this.guardarSessionUsuario(respuestConsultar);
     this.redirigirACrearSolicitud(respuestConsultar.identificacion);
-  }
-
-  mostrarCajaTexto(titulo = 'Error', mensaje = 'Ocurrio un error inesperado.') {
-    this.mesageBox.open(titulo, mensaje);
   }
 
   guardarSessionUsuario(usuario) {

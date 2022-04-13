@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
+import { UsuarioData } from '@shared/model/Usuario/usuario-data';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../model/usuario';
 
@@ -13,7 +14,7 @@ export class UsuarioService {
     const params = new HttpParams().set('identificacion', identificacion);
     const options = this.http.optsName('consultar usuario por identificacion');
     options.params = params;
-    return this.http.doGet<any>(`${environment.endpoint}/v1/clinica/usuarios`, options);
+    return this.http.doGet<UsuarioData>(`${environment.endpoint}/v1/clinica/usuarios`, options);
   }
 
   guardar(usuario: Usuario){

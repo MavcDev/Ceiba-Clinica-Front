@@ -16,18 +16,4 @@
 <div class="form-group">
     <button id="btnBuscarUsuario" *ngIf="this.usuarioForm.valid"  type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
 </div>
-<ng-template #msgBoxModalCrear let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">{{tituloMensaje}}</h5>
-        <button type="button" class="close" (click)="modal.close('cerrar')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body" [innerHTML]="mensaje">
-    </div>
-    <div class="modal-footer">
-        <button id="btncerrar" type="button" class="btn btn-secondary" (click)="modal.close('cerrar')">Cerrar</button>
-        <button id="btnCrearUsuario" type="button" class="btn btn-primary" (click)="modal.close('redirigir')">Crear Usuario</button>
-    </div>
-</ng-template>
-<app-message-box></app-message-box>
+<app-caja-mensaje-crear-usuario (emitirEvento)="confirmadoCrear($event)"></app-caja-mensaje-crear-usuario>

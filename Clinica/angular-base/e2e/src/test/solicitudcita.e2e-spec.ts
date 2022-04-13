@@ -2,19 +2,19 @@ import { NavbarPage } from '../page/navbar/navbar.po';
 import { AppPage } from '../app.po';
 import { UsuarioPage } from '../page/usuario/usuario.po';
 import { browser } from 'protractor';
-import { SolicitudcitaPage } from '../page/solicitudcita/solicitudcita.po';
+import { SolicitudPage } from '../page/solicitud/solicitud.po';
 
 describe('workspace-project Usuario', () => {
     let page: AppPage;
     let navBar: NavbarPage;
     let usuario: UsuarioPage;
-    let solicitudcita: SolicitudcitaPage;
+    let solicitudcita: SolicitudPage;
 
     beforeEach(() => {
         page = new AppPage();
         navBar = new NavbarPage();
         usuario = new UsuarioPage();
-        solicitudcita = new SolicitudcitaPage();
+        solicitudcita = new SolicitudPage();
     });
 
     it('Deberia crear una solictud', () => {
@@ -34,7 +34,7 @@ describe('workspace-project Usuario', () => {
         browser.sleep(100);
         usuario.clickBotonSiConfirmarGuardarUsuario();
         browser.sleep(100);
-        expect(browser.getCurrentUrl()).toBe('http://localhost:4200/solicitudcita/crear;identificacion=1117522445');
+        expect(browser.getCurrentUrl()).toBe('http://localhost:4200/solicitud/crear;identificacion=1117522445');
         // Crear la solicitud
         solicitudcita.seleccionarEspecialidad();
         solicitudcita.seleccionarMedico();
@@ -50,6 +50,6 @@ describe('workspace-project Usuario', () => {
         browser.sleep(100);
 
         expect(solicitudcita.obtenerValorTotal()).toBe('$75,000.00');
-        expect(browser.getCurrentUrl()).toBe('http://localhost:4200/solicitudcita/consultar;id=1;identificacion=1117522445;nombre=Manuel%20Alberto%20Velasquez%20Rivera');
+        expect(browser.getCurrentUrl()).toBe('http://localhost:4200/solicitud/consultar;id=1;identificacion=1117522445;nombre=Manuel%20Alberto%20Velasquez%20Rivera');
     });
 });

@@ -6,10 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from '@home/home.component';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
+import { SharedModule } from '@shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioModule } from './feature/usuario/usuario.module';
-import { SolicitudcitaModule } from './feature/solicitudcita/solicitudcita.module';
-import { ToolModule } from './feature/tool/tool.module';
 
 @NgModule({
   declarations: [
@@ -19,14 +17,12 @@ import { ToolModule } from './feature/tool/tool.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UsuarioModule,
-    SolicitudcitaModule,
     CoreModule,
-    ToolModule,
+    SharedModule,
     NgbModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

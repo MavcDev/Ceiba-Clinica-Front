@@ -7,6 +7,9 @@ import { UsuarioService } from './usuario.service';
 describe('UsuarioService', () => {
   let service: UsuarioService;
 
+  const httpClient = jasmine.createSpyObj('HttpService', ['doGet', 'doPost', 'optsName']);
+  httpClient.optsName.and.returnValue({ params: {} });
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -14,7 +17,7 @@ describe('UsuarioService', () => {
       ],
       providers: [
         UsuarioService,
-        HttpService
+        { provide: HttpService, useValue: httpClient },
       ],
     });
   });
@@ -25,8 +28,6 @@ describe('UsuarioService', () => {
   });
 
   it('valida guardar usuario', async () => {
-    const httpService: HttpService = TestBed.inject(HttpService);
-    spyOn(httpService, 'doPost').and.callThrough();
     service.guardar({
       id: '1',
       identificacion: '1',
@@ -36,6 +37,11 @@ describe('UsuarioService', () => {
       fechaNacimiento: new Date(),
       fechaCreacion: new Date()
     });
-    expect(httpService.doPost).toHaveBeenCalled();
+    expect(httpClient.doPost).toHaveBeenCalled();
+  });
+
+  it('valida consulta solicitud', async () => {
+    service.consultar('1117522442');
+    expect(httpClient.doGet).toHaveBeenCalled();
   });
 });

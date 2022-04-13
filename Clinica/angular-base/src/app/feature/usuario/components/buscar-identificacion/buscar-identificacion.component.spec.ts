@@ -3,13 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MessageBoxComponent } from 'src/app/feature/tool/components/message-box/message-box.component';
 import { HttpService } from '@core/services/http.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { defer, of } from 'rxjs';
+import { UsuarioData } from '@shared/model/Usuario/usuario-data';
+import { defer } from 'rxjs';
+import { CrearSolicitudComponent } from 'src/app/feature/solicitud/components/crear-solicitud/crear-solicitud.component';
 import { UsuarioService } from '../../shared/service/usuario.service';
+import { CajaMensajeCrearUsuarioComponent } from '../caja-mensaje-crear-usuario/caja-mensaje-crear-usuario.component';
+import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 import { BuscarIdentificacionComponent } from './buscar-identificacion.component';
-import { MessageBoxYesNotComponent } from 'src/app/feature/tool/components/message-box-yes-not/message-box-yes-not.component';
 
 
 export function fakeAsyncResponse<T>(data: T) {
@@ -24,22 +25,30 @@ describe('BuscarIdentificacionComponent', () => {
   let component: BuscarIdentificacionComponent;
   let fixture: ComponentFixture<BuscarIdentificacionComponent>;
   let router: Router;
-  const messageBox = jasmine.createSpyObj('MessageBoxComponent', ['open']);
+
+  const usuario: UsuarioData = {
+    id: '1',
+    identificacion: '1117522442',
+    nombreCompleto: 'Manuel Alberto Velasquez Castaño',
+    fechaNacimiento: '1991-12-20'
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BuscarIdentificacionComponent],
       imports: [
         HttpClientModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'solicitudcita/crear', component: CrearSolicitudComponent },
+          { path: 'usuario/crear', component: CrearUsuarioComponent }
+        ]),
         ReactiveFormsModule,
         FormsModule
       ],
       providers: [
         UsuarioService,
         HttpService,
-        { provide: MessageBoxComponent, useValue: messageBox },
-        MessageBoxYesNotComponent
+
       ]
     })
       .compileComponents();
@@ -51,9 +60,6 @@ describe('BuscarIdentificacionComponent', () => {
     router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.callThrough();
     fixture.detectChanges();
-
-    const mesageBox: MessageBoxComponent = jasmine.createSpyObj('MessageBoxComponent', ['open']);
-    component.mesageBox = mesageBox;
   });
 
   it('should create', () => {
@@ -77,22 +83,12 @@ describe('BuscarIdentificacionComponent', () => {
   it('valida el buscar usuario por identificacion', async () => {
     const usuarioServices: UsuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioServices, 'consultar').and.returnValue(
-      of({
-        id: 1,
-        identificacion: '1117522442',
-        nombreCompleto: 'Manuel Alberto Velasquez Castaño',
-        fechaNacimiento: '1991-12-20'
-      })
+      fakeAsyncResponse(usuario)
     );
-    spyOn(component, 'redirigirACrearSolicitud').and.callThrough();
     fixture.detectChanges();
-
-    const mesageBox: MessageBoxComponent = jasmine.createSpyObj('MessageBoxComponent', ['open']);
-    component.mesageBox = mesageBox;
+    component.usuarioForm.controls.identificacion.setValue('1117522442');
     component.buscar();
-
     expect(localStorage.getItem('1117522442')).toBeDefined();
-    expect(component.redirigirACrearSolicitud).toHaveBeenCalled();
   });
 
   it('valida mensaje enviada por la exepcion al buscar', async () => {
@@ -108,22 +104,21 @@ describe('BuscarIdentificacionComponent', () => {
   });
 
   it('valida el mesnaje de presentacion por exepcion 404', () => {
-    const ngbModal: NgbModal = TestBed.inject(NgbModal);
-    spyOn(ngbModal, 'open').and.callThrough();
+    const cajaMensajeCrearUsuario: CajaMensajeCrearUsuarioComponent = jasmine.createSpyObj('CajaMensajeCrearUsuarioComponent', ['abrir']);
+    component.cajaMensajeCrearUsuario = cajaMensajeCrearUsuario;
     fixture.detectChanges();
-    component.mostrarMensajePorExepcionBuscar({ status: 404 }, '1117522442');
-    expect(ngbModal.open).toHaveBeenCalled();
-  });
 
-  it('valida el mesnaje de presentacion por exepcion diferente 404', () => {
-    const mesageBox: MessageBoxComponent = jasmine.createSpyObj('MessageBoxComponent', ['open']);
-    component.mesageBox = mesageBox;
-    component.mostrarMensajePorExepcionBuscar({ status: 500 }, '1117522442');
-    expect(component.mesageBox.open).toHaveBeenCalled();
+    component.mostrarMensajePorExepcionBuscar({ status: 404 }, '1117522442');
+
+    expect(component.cajaMensajeCrearUsuario.abrir).toHaveBeenCalled();
   });
 
   it('valida la redireccion a crear usuario', () => {
-    component.redirigirACrearusuario('1117522442');
+    const cajaMensajeCrearUsuario: CajaMensajeCrearUsuarioComponent = jasmine.createSpyObj('CajaMensajeCrearUsuarioComponent', ['abrir']);
+    cajaMensajeCrearUsuario.abrir('1117522442');
+    component.cajaMensajeCrearUsuario = cajaMensajeCrearUsuario;
+    fixture.detectChanges();
+    component.confirmadoCrear(true);
     expect(router.navigate).toHaveBeenCalled();
   });
 });

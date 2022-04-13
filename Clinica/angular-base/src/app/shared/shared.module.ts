@@ -7,6 +7,10 @@ import { MensajeErrorCamposContenedorDirective } from './directivas/error-campos
 import { ErrorCamposPlantillaComponent } from './directivas/error-campos/componente/error-campos-plantilla.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
+import { CardUsuarioComponent } from './components/card-usuario/card-usuario.component';
+import { CajaMensajeErrorModalComponent } from './components/caja-mensaje-error-modal/caja-mensaje-error-modal.component';
+import { CajaMensajeModalComponent } from './components/caja-mensaje-modal/caja-mensaje-modal.component';
+import { CajaMensajeConfirmacionModalComponent } from './components/caja-mensaje-confirmacion-modal/caja-mensaje-confirmacion-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +18,11 @@ import { TrackByPipe } from './pipe/track-by.pipe';
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
-    TrackByPipe
+    TrackByPipe,
+    CardUsuarioComponent,
+    CajaMensajeModalComponent,
+    CajaMensajeConfirmacionModalComponent,
+    CajaMensajeErrorModalComponent
   ],
   imports: [ReactiveFormsModule, FormsModule],
   exports: [
@@ -25,7 +33,14 @@ import { TrackByPipe } from './pipe/track-by.pipe';
     MensajeErrorCamposSubmitDirective,
     ReactiveFormsModule,
     FormsModule,
-    TrackByPipe
+    TrackByPipe,
+    CardUsuarioComponent,
+    CajaMensajeModalComponent,
+    CajaMensajeConfirmacionModalComponent,
+    CajaMensajeErrorModalComponent
+  ],
+  entryComponents: [
+    CajaMensajeErrorModalComponent
   ]
 })
 export class SharedModule { }

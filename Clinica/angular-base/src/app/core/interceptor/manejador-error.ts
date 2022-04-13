@@ -1,15 +1,22 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CajaMensajeErrorModalComponent } from '@shared/components/caja-mensaje-error-modal/caja-mensaje-error-modal.component';
 import { environment } from '../../../environments/environment';
 import { HTTP_ERRORES_CODIGO } from './http-codigo-error';
 
 @Injectable()
 export class ManejadorError implements ErrorHandler {
-  constructor() {}
+  constructor(private injector: Injector) {}
 
   handleError(error: string | Error): void {
     const mensajeError = this.mensajePorDefecto(error);
     this.imprimirErrorConsola(mensajeError);
+    const service = this.injector.get(NgbModal);
+    const modal = service.open(CajaMensajeErrorModalComponent);
+    modal.componentInstance.titulo = 'Error';
+    console.log(mensajeError.error.mensaje);
+    modal.componentInstance.mensaje = (mensajeError.error?.mensaje) ? mensajeError.error?.mensaje : 'Error inesperado';
   }
 
   private mensajePorDefecto(error) {

@@ -96,7 +96,7 @@
                
             ],
             "scripts": [],
-            "codeCoverageExclude": ["src/app/shared/**", "src/app/core/guard/**"]
+            "codeCoverageExclude": ["src/app/shared/directivas/**","src/app/shared/pipe/**","src/app/core/guard/**"]
           }          
         },
         "lint": {
@@ -108,8 +108,7 @@
               "e2e/tsconfig.json"
             ],
             "exclude": [
-              "**/node_modules/**",
-              "src/app/core/**"
+              "**/node_modules/**"
             ]
           }
         },

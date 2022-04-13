@@ -5,29 +5,23 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { BuscarIdentificacionComponent } from './components/buscar-identificacion/buscar-identificacion.component';
-import { CardUsuarioComponent } from './shared/components/card-usuario/card-usuario.component';
-import { ToolModule } from '../tool/tool.module';
 import { UsuarioService } from './shared/service/usuario.service';
 import { SharedModule } from '@shared/shared.module';
-
+import { CajaMensajeCrearUsuarioComponent } from './components/caja-mensaje-crear-usuario/caja-mensaje-crear-usuario.component';
 
 @NgModule({
   declarations: [
     UsuarioComponent,
     CrearUsuarioComponent,
     BuscarIdentificacionComponent,
-    CardUsuarioComponent,
+    CajaMensajeCrearUsuarioComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     UsuarioRoutingModule,
-    ToolModule,
-    SharedModule,
-  ],
-  exports: [
-    CardUsuarioComponent
+    SharedModule
   ],
   providers: [UsuarioService, DatePipe]
 })

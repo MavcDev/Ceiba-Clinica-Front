@@ -1,0 +1,13 @@
+<h1 class="mt-1">Resgistro de citas</h1>
+
+<div class="mt-5">
+  <h6> Identificación: {{identificacion}} </h6>
+  <h6> Nombre completo: {{nombre}} </h6>
+</div>
+
+<div class="d-grid gap-2">
+  <button class="btn btn-primary" type="button" (click)="redirigirCrearSolicitud()">Solicitar otra cita</button>
+</div>
+
+<app-card-solicitud id="{{'id-' + solicitud.id}}" [solicitud]="solicitud" *ngFor="let solicitud of solicitudes">
+</app-card-solicitud>

@@ -22,7 +22,7 @@ import { RouterModule } from '@angular/router';
     SecurityGuard,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: ManejadorError }
+    { provide: ErrorHandler, useClass: ManejadorError },
   ]
 })
 export class CoreModule { }
