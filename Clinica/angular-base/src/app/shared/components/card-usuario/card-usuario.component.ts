@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UsuarioData } from '@shared/model/usuario/usuario-data';
 import { FormatedService } from '@shared/service/formated.service';
 
@@ -7,14 +7,10 @@ import { FormatedService } from '@shared/service/formated.service';
   templateUrl: './card-usuario.component.html',
   styles: ['']
 })
-export class CardUsuarioComponent implements OnInit {
+export class CardUsuarioComponent {
 
   @Input()
   usuario: UsuarioData;
 
   constructor(public formated: FormatedService) { }
-
-  ngOnInit(): void {
-  }
-
 }
