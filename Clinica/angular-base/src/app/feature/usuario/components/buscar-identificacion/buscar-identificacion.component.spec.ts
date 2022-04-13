@@ -42,8 +42,7 @@ describe('BuscarIdentificacionComponent', () => {
         HttpService,
 
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -52,6 +51,10 @@ describe('BuscarIdentificacionComponent', () => {
     router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.callThrough();
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {

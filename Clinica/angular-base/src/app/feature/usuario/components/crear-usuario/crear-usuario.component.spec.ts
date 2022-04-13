@@ -48,8 +48,7 @@ describe('CrearUsuarioComponent', () => {
         HttpService,
         DatePipe
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -64,6 +63,10 @@ describe('CrearUsuarioComponent', () => {
     );
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
