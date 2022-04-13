@@ -22,7 +22,7 @@ describe('ConsultarSolicitudComponent', () => {
       declarations: [ConsultarSolicitudComponent],
       providers: [SolicitudService, HttpService],
       imports: [HttpClientModule, RouterTestingModule.withRoutes([
-        { path: 'solicitudcita/crear', component: CrearSolicitudComponent}
+        { path: 'solicitud/crear', component: CrearSolicitudComponent}
     ])]
     })
       .compileComponents();

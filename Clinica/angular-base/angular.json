@@ -97,7 +97,7 @@
             ],
             "scripts": [],
             "codeCoverageExclude": ["src/app/shared/directivas/**","src/app/shared/pipe/**","src/app/core/guard/**"]
-          }          
+          }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

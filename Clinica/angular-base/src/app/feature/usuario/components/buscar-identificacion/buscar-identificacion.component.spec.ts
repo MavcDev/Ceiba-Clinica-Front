@@ -87,7 +87,7 @@ describe('BuscarIdentificacionComponent', () => {
     );
     fixture.detectChanges();
     component.usuarioForm.controls.identificacion.setValue('1117522442');
-    component.buscar();
+    await component.buscar();
     expect(localStorage.getItem('1117522442')).toBeDefined();
   });
 
